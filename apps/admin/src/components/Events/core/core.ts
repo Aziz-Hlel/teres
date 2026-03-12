@@ -1,26 +1,54 @@
 import capitalize from '@/utils/capitalize';
 
-export const MODULE_NAME = 'events';
+export const MODULE_NAME = 'event';
 
-export const CARD_DATA = {
-  title: capitalize(MODULE_NAME),
-  description: `Manage your ${MODULE_NAME} and their details here.`,
-  addButton: {
-    label: `Add New ${capitalize(MODULE_NAME)}`,
+export const MODULE_NAME_PLURAL = 'events';
+
+export const ModuleName = {
+  singular: MODULE_NAME,
+  plural: MODULE_NAME_PLURAL,
+} as const;
+
+export const TableData = {
+  MODULE_NAME,
+  ModuleName: capitalize(ModuleName.singular),
+
+  ModuleNamePlural: capitalize(ModuleName.plural),
+
+  href: '/events',
+
+  MainCard: {
+    title: capitalize(ModuleName.plural),
+    description: `Manage your ${capitalize(ModuleName.plural)} and their details here.`,
+    addButton: {
+      label: `Add New ${capitalize(ModuleName.singular)}`,
+    },
   },
-};
 
-export const ADD_DIALOG_DATA = {
-  title: `Add New ${capitalize(MODULE_NAME)}`,
-  description: `Fill the form below to create a new ${MODULE_NAME}.`,
-};
+  AddDialog: {
+    title: `Add New ${capitalize(ModuleName.singular)}`,
+    description: `Fill the form below to create a new ${capitalize(ModuleName.singular)}.`,
+    buttons: {
+      submit: `Add ${capitalize(ModuleName.singular)}`,
+      cancel: 'Cancel',
+    },
+  },
 
-export const EDIT_DIALOG_DATA = {
-  title: `Edit ${capitalize(MODULE_NAME)}`,
-  description: `Fill the form below to edit the ${MODULE_NAME}.`,
-};
+  EditDialog: {
+    title: `Edit ${capitalize(ModuleName.singular)}`,
+    description: `Fill the form below to edit the ${capitalize(ModuleName.singular)}.`,
+    buttons: {
+      submit: `Save changes`,
+      cancel: 'Cancel',
+    },
+  },
 
-export const DELETE_DIALOG_DATA = {
-  title: `Delete ${capitalize(MODULE_NAME)}`,
-  description: `Are you sure you want to delete this ${MODULE_NAME}?`,
+  DeleteDialog: {
+    title: `Delete ${capitalize(ModuleName.singular)}`,
+    description: `Are you sure you want to delete this ${capitalize(ModuleName.singular)}?`,
+    buttons: {
+      submit: `Delete ${capitalize(ModuleName.singular)}`,
+      cancel: 'Cancel',
+    },
+  },
 };
