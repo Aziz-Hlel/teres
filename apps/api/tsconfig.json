@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2020",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@repo/contracts/*": ["../../packages/contracts/src/*"],
+      "@prisma/client": ["./generated/prisma/client/*"]
+    }
+  },
+  "references": [{ "path": "../../packages/contracts" }],
+  "include": ["src/**/*"]
+}
