@@ -2,7 +2,7 @@ import { Table, TableBody } from '../ui/table';
 import TableHeaders from './table/tableComposites/TableHeaders';
 import { DataTableToolbar } from './table/toolBar/DataTableToolbar';
 import { DataTablePagination } from './table/pagination/Pagination';
-import { type TableRowType } from './table/tableDeclarations/typesAndFieldsDeclaration';
+import { type TableRowType } from './core/types';
 import useMyTable from './use-my-table';
 import TableBodyContent from './table/TableMainComp/TableBodyContent';
 import { SelectedRowProvider } from './context/selected-row-provider';

@@ -3,7 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table';
 import { ArrowUp, ChevronsUpDown } from 'lucide-react';
 import HeaderContainer from '../ContainerComp/HeaderContainer';
 import RowContainer from '../ContainerComp/RowContainer';
-import type { TableRowType } from './typesAndFieldsDeclaration';
+import type { TableRowType } from '../../core/types';
 import ActionsColumn from '../columns/ActionsColumn';
 import type { EventDay } from '@repo/contracts/types/enums/enums';
 import EventDayMapping from '@repo/contracts/map/EventDayMapping';

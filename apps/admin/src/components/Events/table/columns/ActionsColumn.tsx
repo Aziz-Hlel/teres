@@ -1,7 +1,7 @@
 import { EllipsisVertical, Trash2, SquarePen } from 'lucide-react';
 
 import React, { Fragment } from 'react';
-import type { TableRowType } from '../tableDeclarations/typesAndFieldsDeclaration';
+import type { TableRowType } from '../../core/types';
 import type { Row } from '@tanstack/react-table';
 import { useSelectedRow } from '../../context/selected-row-provider';
 import {

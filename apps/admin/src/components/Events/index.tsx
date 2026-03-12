@@ -1,7 +1,7 @@
 import { SelectedRowProvider } from './context/selected-row-provider';
 import Main from './Main';
 
-const Products2 = () => {
+const EventsIndex = () => {
   return (
     <SelectedRowProvider>
       <Main />
@@ -9,4 +9,4 @@ const Products2 = () => {
   );
 };
 
-export default Products2;
+export default EventsIndex;

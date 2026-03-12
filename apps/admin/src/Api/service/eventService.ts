@@ -13,8 +13,8 @@ const eventService = {
   create: async (data: CreateEventSchema) =>
     await apiService.postThrowable<EventResponse>(apiRoutes.events.create(), data),
 
-  update: async (id: string, data: UpdateEventSchema) =>
-    await apiService.putThrowable<EventResponse>(apiRoutes.events.update(id), data),
+  update: async (params: { id: string; data: UpdateEventSchema }) =>
+    await apiService.putThrowable<EventResponse>(apiRoutes.events.update(params.id), params.data),
 
   delete: async (id: string) => await apiService.delete<SimpleApiResponse>(apiRoutes.events.delete(id)),
 };

@@ -14,6 +14,7 @@ import { UserSessionProvider } from './context/UserContext';
 import UserPage from './pages/User';
 import ProductPage from './pages/Products';
 import { ThemeProvider } from './utils/theme-provider';
+import Events from './pages/Events';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,6 +49,7 @@ function App() {
                         <Route index path="/profile" element={<Profile />} />
                         <Route path="users/" element={<UserPage />} />
                         <Route path="products/" element={<ProductPage />} />
+                        <Route path="events/" element={<Events />} />
                       </Route>
                     </Route>
                   </Route>

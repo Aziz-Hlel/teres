@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import type { TableRowType } from './tableDeclarations/typesAndFieldsDeclaration';
+import type { TableRowType } from '../core/types';
 import useQueryParams from './use-query-params';
 import type { Pageable } from '@repo/contracts/types/page/Pageable';
 import eventService from '@/Api/service/eventService';

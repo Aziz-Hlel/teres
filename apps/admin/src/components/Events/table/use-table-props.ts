@@ -9,11 +9,7 @@ import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import useQueryParams from './use-query-params';
-import {
-  columnFiltersKeys,
-  defaultQuery,
-  type RequiredTableQueryParams,
-} from './tableDeclarations/typesAndFieldsDeclaration';
+import { columnFiltersKeys, defaultQuery, type RequiredTableQueryParams } from '../core/types';
 
 const setParamIfNotDefault = (params: URLSearchParams, key: keyof RequiredTableQueryParams, value: string) => {
   const defaultValue = defaultQuery[key];

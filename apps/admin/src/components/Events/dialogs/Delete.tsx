@@ -12,16 +12,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import productService from '@/Api/service/productService';
+import { MODULE_NAME } from '../core/core';
 
 const DeleteProduct = () => {
   const { handleCancel, openDialog, currentRow } = useSelectedRow();
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
-    mutationKey: ['products', 'delete'],
+  const { mutateAsync, isPending } = useMutation({
+    mutationKey: [MODULE_NAME, 'delete'],
     mutationFn: productService.deleteProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products'], exact: false });
+      queryClient.invalidateQueries({ queryKey: [MODULE_NAME], exact: false });
       toast.success('Product deleted successfully');
       handleCancel();
     },
@@ -43,13 +44,14 @@ const DeleteProduct = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the product "{currentRow?.name}" and remove its
-              data from our servers.
+              This action cannot be undone. This will permanently delete the event and remove its data from our servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleCancel}>Cancel</AlertDialogCancel>
-            <Button onClick={deleteProduct} className=" bg-red-600 hover:bg-red-500">
+            <AlertDialogCancel onClick={handleCancel} disabled={isPending}>
+              Cancel
+            </AlertDialogCancel>
+            <Button onClick={deleteProduct} disabled={isPending} className=" bg-red-600 hover:bg-red-500">
               Delete
             </Button>
           </AlertDialogFooter>

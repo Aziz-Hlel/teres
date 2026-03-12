@@ -29,10 +29,6 @@ services:
       - '${MINIO_PORT:?MINIO_PORT is required}:${MINIO_DOCKER_PORT:?MINIO_DOCKER_PORT is required}'
       - '${MINIO_UI_PORT:?MINIO_UI_PORT is required}:9001' # Web UI
 
-    env_file:
-      - ${PROJECT_ROOT}/config/.env.dev
-      - ${PROJECT_ROOT}/.env.local
-      - ${PROJECT_ROOT}/.env
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
