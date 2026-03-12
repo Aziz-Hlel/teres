@@ -6,29 +6,14 @@ import { productController } from './product.controller';
 
 const router = Router();
 
-router.post(
-  '/',
-  asyncHandler((req: Request, res: Response) => productController.create(req, res)),
-);
+router.post('/', asyncHandler(productController.create));
 
-router.get(
-  '/',
-  asyncHandler((req: Request, res: Response) => productController.getPage(req, res)),
-);
+router.get('/', asyncHandler(productController.getPage));
 
-router.get(
-  '/:id',
-  asyncHandler((req: Request, res: Response) => productController.getById(req, res)),
-);
+router.get('/:id', asyncHandler(productController.getById));
 
-router.put(
-  '/:id',
-  asyncHandler((req: Request, res: Response) => productController.update(req, res)),
-);
+router.put('/:id', asyncHandler(productController.update));
 
-router.delete(
-  '/:id',
-  asyncHandler((req: Request, res: Response) => productController.delete(req, res)),
-);
+router.delete('/:id', asyncHandler(productController.delete));
 
 export const productRouter = router;

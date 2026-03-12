@@ -42,3 +42,29 @@ export const ProductStatus = {
 } as const;
 
 export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus];
+
+export const EventStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+} as const;
+
+export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus];
+
+export const EventType = {
+  WEEKLY: 'WEEKLY',
+  SPECIAL: 'SPECIAL',
+} as const;
+
+export type EventType = (typeof EventType)[keyof typeof EventType];
+
+export const EventDay = {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY',
+} as const;
+
+export type EventDay = (typeof EventDay)[keyof typeof EventDay];

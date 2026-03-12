@@ -85,6 +85,7 @@ model Media {
 
 
   product     Product?   @relation
+  event       Event?     @relation
 }
 
 
@@ -108,5 +109,49 @@ model Product {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }
+
+
+enum EventStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum EventType {
+  WEEKLY
+  SPECIAL
+}
+
+enum EventDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+model Event {
+  id          String      @id @default(uuid())
+  description String      
+  status      EventStatus @default(ACTIVE)
+  type        EventType @default(SPECIAL)
+  day         EventDay?
+
+  
+
+  thumbnailId     String?  @unique
+  thumbnail       Media?   @relation(fields: [thumbnailId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@unique([day])
+  @@index([day])
+}
+
+
+
+
 
 

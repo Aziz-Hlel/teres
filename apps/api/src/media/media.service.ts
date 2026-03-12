@@ -7,7 +7,17 @@ import { PresignedUrlResponse } from '@repo/contracts/schemas/media/PresignedUrl
 import { Media } from '@/generated/prisma/client';
 import { MediaResponse } from '@repo/contracts/schemas/media/MediaResponse';
 
-export class MediaService {
+class MediaService {
+  async existById(id: string) {
+    const media = await mediaRepo.findMediaById(id);
+    return !!media;
+  }
+
+  async existByKey(key: string) {
+    const media = await mediaRepo.findMediaByKey(key);
+    return !!media;
+  }
+
   async getPresignedUrl(schema: PresignedUrlRequest): Promise<PresignedUrlResponse> {
     const mediaKey = storageService.generateMediaKey(schema.name);
     const { mimeType } = schema;

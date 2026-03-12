@@ -28,6 +28,12 @@ const apiRoutes = {
     updateProduct: (id: string) => `/products/${id}` as const,
     deleteProduct: (id: string) => `/products/${id}` as const,
   },
+  events: {
+    getPage: () => '/events' as const,
+    create: () => '/events/' as const,
+    update: (id: string) => `/events/${id}` as const,
+    delete: (id: string) => `/events/${id}` as const,
+  },
 
   services: {
     emailContactUs: () => '/services/email/contact-us' as const,
