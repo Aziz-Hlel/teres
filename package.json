@@ -15,7 +15,8 @@
     "docker:local": "node scripts/docker-up.js local",
     "dev:api": "pnpm -F api dev",
     "dev:admin": "pnpm -F admin dev",
-    "dev": "pnpm -r --parallel -F api -F admin dev",
+    "dev:web": "pnpm -F web dev",
+    "dev": "pnpm -r --parallel -F api -F admin -F web dev",
     "docker:dev": "node scripts/docker-up.js dev",
     "docker:build": "node scripts/docker-up.js build",
     "docker:stage": "node scripts/docker-up.js stage",
@@ -23,6 +24,7 @@
     "build:packages": "pnpm -F contracts build",
     "build:api": "pnpm build:packages && pnpm -F api build ",
     "build:admin": "pnpm build:packages && pnpm -F admin build ",
+    "build:web": "pnpm build:packages && pnpm -F web build ",
     "start:api": "pnpm -F api start",
     "test": ""
   },

@@ -1,4 +1,26 @@
 services:
+  web:
+    build:
+      context: ${PROJECT_ROOT}
+      dockerfile: docker/dev/Dockerfile.dev.web
+    ports:
+      - ${VITE_WEB_PORT:?VITE_WEB_PORT is required}:${VITE_WEB_PORT}
+    volumes:
+      - ${PROJECT_ROOT}/apps/web/src:/app/apps/web/src
+      - ${PROJECT_ROOT}/apps/web/public:/app/apps/web/public
+      - ${PROJECT_ROOT}/packages/contracts/src:/app/packages/contracts/src
+    env_file:
+      - ${PROJECT_ROOT}/config/.env.dev
+      - ${PROJECT_ROOT}/.env.local
+      - ${PROJECT_ROOT}/.env
+    command: sh -c "pnpm dev:web"
+
+    environment:
+      CHOKIDAR_USEPOLLING: true
+      WATCHPACK_POLLING: true
+    depends_on:
+      - api
+
   admin:
     build:
       context: ${PROJECT_ROOT}

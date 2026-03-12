@@ -6,6 +6,17 @@
     handle /api/* {
         reverse_proxy api:3000
     }
+
+
+    # -----------------------
+    # Web SPA
+    # -----------------------
+    handle {
+        root * /srv/web
+        encode gzip
+        file_server
+        try_files {path} /index.html
+    }
 	
     log {
 		level ERROR
