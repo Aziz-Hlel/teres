@@ -6,10 +6,10 @@ import { BookingRequest } from '@repo/contracts/schemas/email/bookingRequest';
 
 class EmailService {
   private readonly EMAIL_ADDRESSES = {
-    noReply: 'no-reply@basemonorepo.com',
-    sender: 'no-reply@basemonorepo.com',
+    noReply: 'no-reply@teresbahrain.com',
+    sender: 'no-reply@teresbahrain.com',
     devRecipients: ['m.aziz.hlel@gmail.com'],
-    prodRecipients: ['contact@basemonorepo.com'],
+    prodRecipients: ['contact@teresbahrain.com'],
   };
   private readonly mailer = {
     contactUs: {

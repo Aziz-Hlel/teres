@@ -39,6 +39,6 @@ export class AwsStorageService implements IStorageProvider {
   }
 
   getObjectUrl(fileKey: string): string {
-    return `${this.config.AWS_CLOUDFRONT_URL}/${fileKey}`;
+    return `https://${this.config.AWS_CLOUDFRONT_URL}/${fileKey}`;
   }
 }
