@@ -1,5 +1,6 @@
 services:
   reverse-proxy:
+    container_name: teres-reverse-proxy
     build:
       context: ${PROJECT_ROOT}
       dockerfile: ./docker/prod/Dockerfile.prod.caddy
