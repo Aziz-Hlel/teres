@@ -48,12 +48,12 @@ const navRoutes: NavRoute[] = [
     icon: UsersRound,
     isActive: true,
   },
-  {
-    title: 'Products',
-    url: '/products',
-    icon: Package,
-    isActive: true,
-  },
+  // {
+  //   title: 'Products',
+  //   url: '/products',
+  //   icon: Package,
+  //   isActive: true,
+  // },
   {
     title: 'Events',
     url: '/events',
