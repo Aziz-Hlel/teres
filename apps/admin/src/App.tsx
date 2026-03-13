@@ -40,15 +40,15 @@ function App() {
               <AuthProvider>
                 <Routes>
                   <Route path="/signin" element={<SignIn />} />
-                  <Route path="/signup" element={<SignUp />} />
+                  {/* <Route path="/signup" element={<SignUp />} /> */}
 
                   <Route element={<AuthenticatedRoutes />}>
                     <Route element={<UserSessionProvider />}>
                       <Route element={<Sidebar dir={dir} />}>
                         <Route path="/" element={<Home />} />
                         <Route index path="/profile" element={<Profile />} />
-                        <Route path="users/" element={<UserPage />} />
-                        <Route path="products/" element={<ProductPage />} />
+                        {/* <Route path="users/" element={<UserPage />} /> */}
+                        {/* <Route path="products/" element={<ProductPage />} /> */}
                         <Route path="events/" element={<Events />} />
                       </Route>
                     </Route>

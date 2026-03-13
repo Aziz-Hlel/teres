@@ -94,10 +94,10 @@ export function LoginForm({ form, onSubmit }: LoginFormProps) {
                   <span className=" text-xs lg:text-sm xl:text-base">Continue with Google</span>
                 </Button>
               </Field>
-              <FieldDescription className="text-center space-x-1">
+              {/* <FieldDescription className="text-center space-x-1">
                 <span>Don&apos;t have an account?</span>
                 <Link to="/signup">Sign up</Link>
-              </FieldDescription>
+              </FieldDescription> */}
             </FieldGroup>
           </form>
           <div className="bg-muted relative hidden md:block">
