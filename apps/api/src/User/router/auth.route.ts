@@ -7,10 +7,10 @@ import { requireAuth } from '../../middleware/requireAuth.middleware';
 
 const router = Router();
 
-router.post(
-  '/register',
-  asyncHandler((req: Request, res: Response) => authController.register(req, res)),
-);
+// router.post(
+//   '/register',
+//   asyncHandler((req: Request, res: Response) => authController.register(req, res)),
+// );
 
 router.post(
   '/login',

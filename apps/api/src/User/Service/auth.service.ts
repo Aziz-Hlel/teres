@@ -1,6 +1,6 @@
 import { firebaseAuthService } from '../../firebase/service/firebase.auth.service';
 import UserMapper from '../mapper/user.mapper';
-import { InternalServerError } from '../../err/customErrors';
+import { BadRequestError, InternalServerError } from '../../err/customErrors';
 import { DecodedIdTokenWithClaims } from '../../types/auth/DecodedIdTokenWithClaims';
 import { userRepo } from '../repo/user.repo';
 import { UserProfileResponse } from '@repo/contracts/schemas/profile/UserProfileResponse';
@@ -57,13 +57,14 @@ class AuthService {
     let user = await userRepo.getUserByAuthId(userAuthId);
 
     if (!user) {
-      const userToCreate = UserMapper.toUserCreateInput(decodedToken);
-      user = await userRepo.createUser(userToCreate);
-      await this.firebaseService.setCustomUserClaims({
-        userId: user.id,
-        userAuthId: user.authId,
-        userRole: user.role,
-      });
+      throw new BadRequestError(`User with authId ${userAuthId} does not exist in the system.`);
+      // const userToCreate = UserMapper.toUserCreateInput(decodedToken);
+      // user = await userRepo.createUser(userToCreate);
+      // await this.firebaseService.setCustomUserClaims({
+      //   userId: user.id,
+      //   userAuthId: user.authId,
+      //   userRole: user.role,
+      // });
     }
 
     return UserMapper.toUserProfileResponse(user, decodedToken.picture || null);

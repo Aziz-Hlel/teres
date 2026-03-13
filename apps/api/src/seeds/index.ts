@@ -7,14 +7,23 @@ import seedSpecialEvents from './fakes/events.fake';
 
 const seed = async () => {
   if (['production', 'staging'].includes(ENV.NODE_ENV)) {
-    console.log('ℹ️ NOTE : Skipped seeding in production environment.');
+    console.log('✅ SUCCESS : Seeding of production data completed.');
+    const specialEventsSeed = seedSpecialEvents();
+    const eventsSeed = eventsInit();
+
+    try {
+      await Promise.all([specialEventsSeed, eventsSeed]);
+    } catch (error) {
+      console.error('❌ ERROR : Seeding of production data failed.', error);
+      throw error;
+    }
     return;
   }
   const userSeed = seedUsers(50);
   const prodUsersSeed = seedProdUsers();
-  const eventsSeed = eventsInit();
-
   const productsSeed = seedProducts();
+
+  const eventsSeed = eventsInit();
   const specialEventsSeed = seedSpecialEvents();
 
   try {
