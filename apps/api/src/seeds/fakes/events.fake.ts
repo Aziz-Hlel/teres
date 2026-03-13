@@ -6,15 +6,15 @@ import { mediaRepo } from '@/media/media.repo';
 const fakeSpecialEventsEvents: { desciption: string; thumbnailKey: string }[] = [
   {
     desciption: 'Special Event 1',
-    thumbnailKey: 'special_event1.png',
+    thumbnailKey: 'events/special_event1.png',
   },
   {
     desciption: 'Special Event 2',
-    thumbnailKey: 'special_event2.jpg',
+    thumbnailKey: 'events/special_event2.jpg',
   },
   {
     desciption: 'Special Event 3',
-    thumbnailKey: 'special_event3.jpg',
+    thumbnailKey: 'events/special_event3.jpg',
   },
 ];
 

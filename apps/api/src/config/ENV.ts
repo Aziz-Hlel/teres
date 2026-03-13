@@ -55,10 +55,17 @@ const baseSchema = z
 
 const prodSchema = baseSchema.extend({
   NODE_ENV: z.enum(['production', 'stage']),
+
+  AWS_REGION: z.string(),
+  AWS_ACCESS_KEY_ID: z.string(),
+  AWS_SECRET_ACCESS_KEY: z.string(),
+  AWS_S3_BUCKET: z.string(),
+  AWS_CLOUDFRONT_URL: z.string(),
 });
 
 const devSchema = baseSchema.extend({
   NODE_ENV: z.enum(['dev', 'build']),
+
   MINIO_REGION: z.string(),
   MINIO_ROOT_USER: z.string(),
   MINIO_ROOT_PASSWORD: z.string(),
