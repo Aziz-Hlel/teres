@@ -35,6 +35,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@repo/contracts': path.resolve(process.cwd(), '../../packages/contracts/src'),
     },
   },
 }));

@@ -78,6 +78,7 @@ const CreateDialog = () => {
       newMediaId ? { shouldDirty: true, shouldValidate: true } : undefined,
     );
   };
+
   return (
     <Dialog onOpenChange={onOpenChange} open={dialogIsOpen}>
       <DialogContent className="sm:max-w-106.25 h-[calc(100dvh-4rem)] flex flex-col overflow-hidden  ">

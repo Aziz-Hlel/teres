@@ -2,6 +2,7 @@ import { SendContactUsRequest } from '@repo/contracts/schemas/email/sendContactU
 import { emailUtils } from './email.utils';
 import { emailProvider } from './email.provider';
 import ENV from '@/config/ENV';
+import { BookingRequest } from '@repo/contracts/schemas/email/bookingRequest';
 
 class EmailService {
   private readonly EMAIL_ADDRESSES = {
@@ -20,6 +21,17 @@ class EmailService {
   async sendContactEmail(payload: SendContactUsRequest) {
     const html = emailUtils.createContactUsHtml(payload);
     const mailSubject = `New Contact Us Request from ${payload.name}`;
+    await emailProvider.sendEmail({
+      from: this.mailer.contactUs.from,
+      to: this.mailer.contactUs.to,
+      subject: mailSubject,
+      text: html,
+    });
+  }
+
+  async sendBookingEmail(payload: BookingRequest) {
+    const html = emailUtils.createBookingHtml(payload);
+    const mailSubject = `New Booking Request from ${payload.firstName} ${payload.lastName}`;
     await emailProvider.sendEmail({
       from: this.mailer.contactUs.from,
       to: this.mailer.contactUs.to,

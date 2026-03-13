@@ -1,4 +1,5 @@
 import z from 'zod';
+import { InquirySubjectEnum } from './InquirySubjectEnum';
 
 export const sendContactUsRequestSchema = z.object({
   name: z
@@ -7,11 +8,7 @@ export const sendContactUsRequestSchema = z.object({
     .min(3, 'Name must be at least 3 characters long')
     .max(255, 'Name must be at most 255 characters long'),
   email: z.email(),
-  subject: z
-    .string()
-    .trim()
-    .min(3, 'Subject must be at least 3 characters long')
-    .max(255, 'Subject must be at most 255 characters long'),
+  inquirySubject: z.enum(InquirySubjectEnum),
   message: z
     .string()
     .trim()
