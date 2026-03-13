@@ -15,6 +15,16 @@ const prodUsers = [
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),
   },
+  {
+    email: 'Ahmedjedudu@yahoo.fr',
+    username: 'Ahmed jedidi',
+    role: Role.SUPER_ADMIN,
+    authId: 'google-oauth2|11256677889900',
+    provider: 'google.com',
+    isEmailVerified: true,
+    createdAt: faker.date.past(),
+    updatedAt: faker.date.recent(),
+  },
 ] as const;
 
 export const seedProdUsers = async () => {
