@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
 
@@ -13,8 +13,17 @@ const firebaseConfig = {
   measurementId: 'G-DH71YEDZKQ',
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-getAnalytics(app);
+// Initialize Firebase app only once
+const app = getApps()[0] || initializeApp(firebaseConfig);
+
+// Initialize Analytics safely (optional)
+if (typeof window !== 'undefined') {
+  try {
+    getAnalytics(app);
+  } catch (err) {
+    console.warn('Analytics not supported in this environment:', err);
+  }
+}
 
 export const firebaseAuth = getAuth(app);
+export default app;
