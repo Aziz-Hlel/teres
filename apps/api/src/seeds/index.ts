@@ -10,9 +10,9 @@ const seed = async () => {
     console.log('✅ SUCCESS : Seeding of production data completed.');
     const specialEventsSeed = seedSpecialEvents();
     const eventsSeed = eventsInit();
-
+    const prodUsersSeed = seedProdUsers();
     try {
-      await Promise.all([specialEventsSeed, eventsSeed]);
+      await Promise.all([specialEventsSeed, eventsSeed, prodUsersSeed]);
     } catch (error) {
       console.error('❌ ERROR : Seeding of production data failed.', error);
       throw error;
