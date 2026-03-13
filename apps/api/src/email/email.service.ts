@@ -9,7 +9,7 @@ class EmailService {
     noReply: 'no-reply@teresbahrain.com',
     sender: 'no-reply@teresbahrain.com',
     devRecipients: ['m.aziz.hlel@gmail.com'],
-    prodRecipients: ['contact@teresbahrain.com'],
+    prodRecipients: ['m.aziz.hlel@gmail.com'],
   };
   private readonly mailer = {
     contactUs: {
