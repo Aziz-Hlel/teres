@@ -1,5 +1,5 @@
 import type { DropzoneOptions } from 'react-dropzone';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useImageUpload from '../use-Image-Upload';
 import CircularProgressBar from '../CircularProgressBar ';
 import FileUploadComp from './FileUploadComp';
@@ -10,10 +10,17 @@ type ImageUploadProps = {
   initMedia: { id: string; url: string; key: string } | null;
   mediaErrors: (string | undefined)[];
   handleMediaUpload: (newMediaId: string | null) => void;
+  aspect?: number | null;
   clearMediaErrors: () => void;
 };
 
-const ImageUpload = ({ initMedia, mediaErrors, handleMediaUpload, clearMediaErrors }: ImageUploadProps) => {
+const ImageUpload = ({
+  initMedia,
+  mediaErrors,
+  handleMediaUpload,
+  aspect: aspectProp,
+  clearMediaErrors,
+}: ImageUploadProps) => {
   const maxSizeInMB = 4;
 
   const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
@@ -26,6 +33,7 @@ const ImageUpload = ({ initMedia, mediaErrors, handleMediaUpload, clearMediaErro
     },
     multiple: false,
   };
+  const [aspect, setAspect] = useState<number | undefined>(undefined);
 
   const {
     currentDisplayed,
@@ -46,6 +54,17 @@ const ImageUpload = ({ initMedia, mediaErrors, handleMediaUpload, clearMediaErro
     clearErrors: clearMediaErrors,
     handleMediaUpload,
   });
+
+  useEffect(() => {
+    if (aspectProp) return;
+    if (!file) return;
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = () => {
+      setAspect(img.width / img.height);
+    };
+  }, [file]);
 
   const imgUrl: string | undefined = useMemo(() => (file ? URL.createObjectURL(file) : undefined), [file]);
 
@@ -68,6 +87,7 @@ const ImageUpload = ({ initMedia, mediaErrors, handleMediaUpload, clearMediaErro
             imgUrl={imgUrl}
             crop={crop}
             zoom={zoom}
+            aspect={aspect}
             onCropChange={onCropChange}
             onZoomChange={onZoomChange}
             handleCancel={handleCancel}

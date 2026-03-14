@@ -10,12 +10,14 @@ type ImageCropperComProps = {
   handleCancel: () => void;
   Crop_OptimizeImage: () => Promise<void>;
   onCropComplete: (_: Point, croppedAreaPixels: Area) => void;
+  aspect: number | undefined;
 };
 
 export default function ImageCropperCom({
   imgUrl,
   crop,
   zoom,
+  aspect,
   onCropChange,
   onZoomChange,
   handleCancel,
@@ -34,7 +36,7 @@ export default function ImageCropperCom({
               image={imgUrl}
               crop={crop}
               zoom={zoom}
-              aspect={9 / 16}
+              aspect={aspect}
               onCropChange={onCropChange}
               onCropComplete={onCropComplete}
               classes={{
