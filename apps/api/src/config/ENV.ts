@@ -49,21 +49,18 @@ const prodSchema = baseSchema.extend({
 
   // CORS
   ALLOWED_ORIGIN_PATTERNS: z
-    .string({ error: 'ALLOWED_ORIGIN_PATTERNS is required in production environments' })
+    .string({ error: 'ALLOWED_ORIGIN_PATTERNS is required in prod environments' })
+    .transform((origins) => origins.split(','))
     .refine(
       (origins) => {
-        try {
-          const regexOrigins = /^https:\/\/([a-z0-9-]+\.)+[a-z]{2,}(,([a-z0-9-]+\.)+[a-z]{2,})*$/i;
-          return regexOrigins.test(origins);
-        } catch (_) {
-          return false;
-        }
+        const regexOrigins = /^https:\/\/([a-z0-9-]+\.)+[a-z]{2,}(,([a-z0-9-]+\.)+[a-z]{2,})*$/i;
+        return origins.every((origin) => regexOrigins.test(origin));
       },
       {
-        error: 'ALLOWED_ORIGIN_PATTERNS is invalid, it do not follow the pattern https://domain.com,https://domain.com',
+        error:
+          'ALLOWED_ORIGIN_PATTERNS is invalid, it does not follow the pattern https://domain.com,https://domain.com',
       },
-    )
-    .transform((origins) => origins.split(',')),
+    ),
 });
 
 const devSchema = baseSchema.extend({
