@@ -7,11 +7,22 @@ import { EventResponse } from '@repo/contracts/schemas/events/eventResponse';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
+import { EventDay } from '@repo/contracts/types/enums/enums';
+
+const eventDayToDisplay: Record<EventDay, string> = {
+  [EventDay.MONDAY]: 'MON',
+  [EventDay.TUESDAY]: 'TUE',
+  [EventDay.WEDNESDAY]: 'WED',
+  [EventDay.THURSDAY]: 'THU',
+  [EventDay.FRIDAY]: 'FRI',
+  [EventDay.SATURDAY]: 'SAT',
+  [EventDay.SUNDAY]: 'SUN',
+};
 
 const EventsPage = () => {
   const [events, setEvents] = useState<EventResponse[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<EventResponse | null>(null);
-  const [filterDate, setFilterDate] = useState<string | null>(null);
+  const [filterDate, setFilterDate] = useState<EventResponse | null>(null);
 
   // 1. Fetch des données
   useEffect(() => {
@@ -34,14 +45,13 @@ const EventsPage = () => {
   }, []);
 
   // 3. Filtrage des événements (Calendrier)
-  const filteredEvents = useMemo(() => {
+  const weeklyEvents = useMemo(() => {
     return events.filter((event) => event.type === 'WEEKLY');
-    if (!filterDate) return events;
-  }, [events, filterDate]);
+  }, [events]);
 
   // 4. Sélection des événements exclusifs (ex: catégorie 'Exclusive' ou 3 derniers)
   const exclusiveEvents = useMemo(() => {
-    return events.slice(0, 3); // Vous pouvez remplacer par .filter(e => e.category === 'Exclusive')
+    return events.filter((event) => event.type === 'SPECIAL'); // Vous pouvez remplacer par .filter(e => e.category === 'Exclusive')
   }, [events]);
 
   return (
@@ -81,23 +91,17 @@ const EventsPage = () => {
                 All Events
               </button>
 
-              {calendarDays.map((date) => {
-                const dateISO = date.toISOString().split('T')[0];
-                const isSelected = filterDate === dateISO;
+              {Object.keys(eventDayToDisplay).map((date) => {
                 return (
                   <button
-                    key={dateISO}
-                    onClick={() => setFilterDate(dateISO)}
+                    onClick={() => setSelectedEvent(weeklyEvents.find((event) => event.day === date) || null)}
                     className={`flex flex-col items-center min-w-[80px] py-3 border transition-all duration-500 ${
-                      isSelected ? 'border-primary bg-primary/10' : 'border-white/5 bg-white/5 hover:border-white/20'
+                      selectedEvent?.day === date
+                        ? 'border-primary bg-primary/10'
+                        : 'border-white/5 bg-white/5 hover:border-white/20'
                     }`}
                   >
-                    <span className="text-[9px] text-white/40 uppercase mb-1">
-                      {date.toLocaleDateString('en-US', { weekday: 'short' })}
-                    </span>
-                    <span className={`text-xl font-bold ${isSelected ? 'text-primary' : 'text-white'}`}>
-                      {date.getDate()}
-                    </span>
+                    <span className="text-lg text-white uppercase ">{eventDayToDisplay[date]}</span>
                   </button>
                 );
               })}
@@ -108,12 +112,12 @@ const EventsPage = () => {
         {/* --- MAIN EVENTS SWIPER --- */}
         <section className="py-20 px-4 relative bg-[#070619]">
           <div className="container mx-auto max-w-7xl">
-            {filteredEvents.length > 0 ? (
+            {weeklyEvents.length > 0 ? (
               <Swiper
                 effect={'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
-                loop={filteredEvents.length > 2}
+                loop={weeklyEvents.length > 2}
                 slidesPerView={'auto'}
                 coverflowEffect={{
                   rotate: 30,
@@ -126,18 +130,17 @@ const EventsPage = () => {
                 modules={[EffectCoverflow, Autoplay]}
                 className="!overflow-visible"
               >
-                {filteredEvents.map((event) => (
+                {weeklyEvents.map((event) => (
                   <SwiperSlide key={event.id} className="w-[280px] sm:w-[350px] md:w-[450px]">
                     <div
                       onClick={() => setSelectedEvent(event)}
                       className="group cursor-pointer relative bg-black border border-white/5 overflow-hidden transition-all duration-700 hover:border-primary/50"
                     >
                       <div className="aspect-[3/4] overflow-hidden relative">
-                        <div className="absolute top-6 left-6 z-30 bg-black/80 backdrop-blur-md border border-white/10 p-3 text-center min-w-[60px]">
-                          <span className="block text-primary text-[10px] font-bold uppercase tracking-tighter">
-                            {new Date().toLocaleDateString('en-US', { month: 'short' })}
+                        <div className="absolute top-6 left-6 z-30 bg-black/40 backdrop-blur-md border border-white/10 p-3 text-center min-w-[60px]">
+                          <span className="block text-primary text-md font-bold uppercase tracking-tighter">
+                            {event.day}
                           </span>
-                          <span className="block text-white text-2xl font-light">{event.day}</span>
                         </div>
 
                         <img
