@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <Link to="/" className="flex items-center">
           <img
-            src="/tereslogo.png"
+            src="/logo ter.png"
             alt="Iteros Logo"
             className="h-8 w-auto" // Ajustez la hauteur selon vos besoins
           />

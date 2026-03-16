@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
-import ArtDecoPattern from "./ArtDecoPattern";
-
+import { motion } from 'framer-motion';
+import ArtDecoPattern from './ArtDecoPattern';
 
 const HeroSection = () => {
   return (
@@ -23,8 +22,6 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6">
-    
-
         <motion.div
           className="art-deco-line w-40 mx-auto mb-10"
           initial={{ scaleX: 0 }}
@@ -41,14 +38,14 @@ const HeroSection = () => {
           Bahrain - Manama
         </motion.p>
 
-        <motion.h1
-          className="font-display text-6xl md:text-8xl lg:text-9xl tracking-[0.15em] text-foreground text-glow mb-4"
+        <motion.img
+          src="/logo ter.png" // Remplacez par le chemin de votre image
+          alt="Logo 'terǝs"
+          className="h-24 md:h-32 lg:h-40 w-auto mb-4" // Ajustez la hauteur selon vos besoins
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-        >
-          'terǝs
-        </motion.h1>
+        />
 
         <motion.p
           className="font-display text-base md:text-lg tracking-[0.5em] uppercase text-primary mb-6"
@@ -77,11 +74,11 @@ const HeroSection = () => {
 
         <motion.a
           href="/booking"
-          className="hidden md:inline-block font-body text-xs tracking-[0.3em] uppercase px-6 py-2.5 border border-white text-white hover:bg-white hover:text-primary-foreground transition-all duration-300 rounded-full"     
+          className="hidden md:inline-block font-body text-xs tracking-[0.3em] uppercase px-6 py-2.5 border border-white text-white hover:bg-white hover:text-primary-foreground transition-all duration-300 rounded-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.3 }}
-          whileHover={{ scale: 1.02, boxShadow: "0 0 30px hsl(168 76% 46% / 0.3)" }}
+          whileHover={{ scale: 1.02, boxShadow: '0 0 30px hsl(168 76% 46% / 0.3)' }}
         >
           Book a Table
         </motion.a>
@@ -98,7 +95,7 @@ const HeroSection = () => {
           <motion.div
             className="w-1 h-2 bg-primary/50 rounded-full mt-1.5"
             animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           />
         </div>
       </motion.div>

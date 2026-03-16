@@ -49,11 +49,9 @@ const Contact = () => {
 
         <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <span className="h-[1px] w-8 bg-primary" />
-            <span className="font-sans text-[10px] tracking-[0.8em] uppercase text-primary mb-6 animate-pulse">
+            <span className="font-sans text-[12px] tracking-[0.8em] uppercase text-primary mb-6 animate-pulse">
               Concierge Services
             </span>
-            <span className="h-[1px] w-8 bg-primary" />
           </div>
 
           <h1 className="font-display text-5xl md:text-6xl tracking-wide text-foreground mb-6 text-glow">Contact</h1>
