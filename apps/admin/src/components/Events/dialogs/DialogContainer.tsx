@@ -1,13 +1,17 @@
-import { useSelectedRow } from '../context/selected-row-provider';
 import CreateDialog from './create/CreateDialog';
 import DeleteDialog from './delete/DeleteDialog';
 import UpdateDialog from './update/UpdateDialog';
+import { useSelectedRow } from '../context/selected-row-provider';
 
 const DialogContainer = () => {
-  const { openDialog } = useSelectedRow();
-  if (openDialog === 'add') return <CreateDialog />;
-  if (openDialog === 'delete') return <DeleteDialog />;
-  if (openDialog === 'edit') return <UpdateDialog />;
+  const { dialogState } = useSelectedRow();
+  return (
+    <>
+      {dialogState.openDialog === 'edit' && <UpdateDialog />}
+      {dialogState.openDialog === 'add' && <CreateDialog />}
+      {dialogState.openDialog === 'delete' && <DeleteDialog />}
+    </>
+  );
 };
 
 export default DialogContainer;

@@ -5,31 +5,26 @@ import { DataTablePagination } from './table/pagination/Pagination';
 import { type TableRowType } from './core/types';
 import useMyTable from './use-my-table';
 import TableBodyContent from './table/TableMainComp/TableBodyContent';
-import { SelectedRowProvider } from './context/selected-row-provider';
-import DialogContainer from './dialogs/DialogContainer';
 
 const MainTable = () => {
   const { table, pageSize, isLoading } = useMyTable();
 
   return (
     <>
-      <SelectedRowProvider>
-        <div className="w-full max-w-full flex flex-col gap-4  ">
-          <DataTableToolbar table={table} filters={[]} />
-          <div className=" rounded-md border  overflow-hidden">
-            <Table className="table-fixed ">
-              <TableHeaders<TableRowType> table={table} />
-              <TableBody>
-                <TableBodyContent table={table} isLoading={isLoading} pageSize={pageSize} />
-              </TableBody>
-            </Table>
-          </div>
-          <div>
-            <DataTablePagination table={table} className="mt-auto" />
-            <DialogContainer />
-          </div>
+      <div className="w-full max-w-full flex flex-col gap-4  ">
+        <DataTableToolbar table={table} filters={[]} />
+        <div className=" rounded-md border  overflow-hidden">
+          <Table className="table-fixed ">
+            <TableHeaders<TableRowType> table={table} />
+            <TableBody>
+              <TableBodyContent table={table} isLoading={isLoading} pageSize={pageSize} />
+            </TableBody>
+          </Table>
         </div>
-      </SelectedRowProvider>
+        <div>
+          <DataTablePagination table={table} className="mt-auto" />
+        </div>
+      </div>
     </>
   );
 };

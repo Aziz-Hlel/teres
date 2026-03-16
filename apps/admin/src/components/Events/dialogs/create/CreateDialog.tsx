@@ -22,7 +22,7 @@ import eventService from '@/Api/service/eventService';
 import FormUI from '../shared/FormUI';
 
 const CreateDialog = () => {
-  const { handleCancel, openDialog } = useSelectedRow();
+  const { handleCancel, dialogState } = useSelectedRow();
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
@@ -61,9 +61,7 @@ const CreateDialog = () => {
     }
   };
 
-  const dialogIsOpen = openDialog === 'add';
-
-  console.log('form :', form.getValues());
+  const dialogIsOpen = dialogState.openDialog === 'add';
 
   const thumbnailErrors = [form.formState.errors.thumbnailId?.message];
 

@@ -7,7 +7,7 @@ import DialogContainer from './dialogs/DialogContainer';
 import { TableData } from './core/core';
 
 const Main = () => {
-  const { handleDialogChange } = useSelectedRow();
+  const { handleDialogStateChange } = useSelectedRow();
   return (
     <div>
       <BreadcrumbHeader breadcrumbs={[{ title: TableData.MainCard.title, href: TableData.href }]} />
@@ -17,7 +17,9 @@ const Main = () => {
             <CardTitle>{TableData.MainCard.title}</CardTitle>
             <CardDescription>{TableData.MainCard.description}</CardDescription>
             <CardAction>
-              <Button onClick={() => handleDialogChange('add')}>{TableData.MainCard.addButton.label}</Button>
+              <Button onClick={() => handleDialogStateChange({ openDialog: 'add' })}>
+                {TableData.MainCard.addButton.label}
+              </Button>
             </CardAction>
           </CardHeader>
           <CardContent>
