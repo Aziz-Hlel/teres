@@ -55,14 +55,14 @@ const Footer = () => {
         </div>
 
         {/* FOOTER BAR : Copyright & Mentions */}
-        <div className="pt-10 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
-          <span className="text-[9px] tracking-[0.4em] uppercase text-muted-foreground/20">
+        <div className="pt-10 border-t border-white/[0.03] text-white flex flex-col md:flex-row justify-between items-center gap-6">
+          <span className="text-[9px] tracking-[0.4em] uppercase text-gray-300">
             © 2026 ITEROS.
             <a
               href="https://www.technoshark.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white transition-colors"
+              className="text-white transition-colors underline"
             >
               TechnoShark
             </a>
