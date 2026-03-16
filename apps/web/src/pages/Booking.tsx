@@ -65,7 +65,9 @@ const Booking = () => {
               Exclusive Experience
             </span>
 
-            <h1 className="font-display text-6xl md:text-8xl tracking-tighter text-white mb-8">The Reserve</h1>
+            <h1 className="font-display text-5xl md:text-6xl tracking-wide text-foreground mb-6 text-glow">
+              The Reserve
+            </h1>
 
             <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-8" />
 
