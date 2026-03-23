@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@plugin 'tailwind-scrollbar';
+
 @layer base {
   :root {
     --background: 244 78% 6%;
@@ -95,18 +97,27 @@
     font-family: var(--font-body);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
   }
 }
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 20px hsl(168 76% 46% / 0.4), 0 0 40px hsl(168 76% 46% / 0.2);
+    text-shadow:
+      0 0 20px hsl(168 76% 46% / 0.4),
+      0 0 40px hsl(168 76% 46% / 0.2);
   }
 
   .border-glow {
-    box-shadow: 0 0 15px hsl(168 76% 46% / 0.15), inset 0 0 15px hsl(168 76% 46% / 0.05);
+    box-shadow:
+      0 0 15px hsl(168 76% 46% / 0.15),
+      inset 0 0 15px hsl(168 76% 46% / 0.05);
   }
 
   .art-deco-line {

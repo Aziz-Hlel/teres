@@ -27,6 +27,7 @@ export default defineConfig(({ mode }) => ({
     port: getPort(mode),
     strictPort: true,
     host: '0.0.0.0', // for docker
+    allowedHosts: true, // to enable forwarding
     // hmr: {
     //   overlay: false,
     // },
