@@ -70,11 +70,8 @@ const CreateDialog = () => {
   };
 
   const handleThumbnailUpload = (newMediaId: string | null) => {
-    form.setValue(
-      'thumbnailId',
-      newMediaId ?? '',
-      newMediaId ? { shouldDirty: true, shouldValidate: true } : undefined,
-    );
+    const options = newMediaId ? { shouldDirty: true, shouldValidate: true } : undefined;
+    form.setValue('thumbnailId', newMediaId ?? '', options);
   };
 
   return (
