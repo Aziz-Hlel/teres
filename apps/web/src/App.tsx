@@ -14,6 +14,7 @@ import { ScrollToTop } from './lib/ScrollToTop';
 import Menu2 from './pages/Menu2';
 import MainLayout from './layouts/MainLayout';
 import NoFooterLayout from './layouts/NoFooterLayout';
+import MenuAll from './components/menuAll/menuMobile';
 
 const queryClient = new QueryClient();
 
@@ -33,13 +34,12 @@ const App = () => (
             <Route path="/events" element={<Events />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/menu" element={<Menu />} />
+            <Route path="/menu/all" element={<MenuAll />} />
           </Route>
 
           {/* Routes WITHOUT footer */}
           <Route element={<NoFooterLayout />}>
-            <Route path="/menu2" element={<Menu2 />} />
-            <Route path="/all" element={<Menu />} />
+            <Route path="/menu" element={<Menu2 />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
