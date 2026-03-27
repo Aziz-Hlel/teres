@@ -8,6 +8,7 @@ type FileUploadCompProps = {
   maxSizeInBytes: number;
   dropZoneConfig: DropzoneOptions;
   hasErrors: boolean;
+  setError: (message: string) => void;
 };
 
 export default function FileUploadComp({
@@ -15,18 +16,19 @@ export default function FileUploadComp({
   maxSizeInBytes,
   dropZoneConfig,
   hasErrors,
+  setError,
 }: FileUploadCompProps) {
   return (
     <div className="relative w-full h-full flex flex-col justify-start ">
-      <div className=" text-sm text-left w-full font-semibold mb-1">Thumbnail</div>
-      <div className=" text-sm text-left w-full text-gray-600 font-light mb-4">Select an image to upload.</div>
-
       <FileUploader
         value={null}
         onValueChange={onFileChange}
         maxImageSize={maxSizeInBytes}
         dropzoneOptions={dropZoneConfig}
-        className="relative  bg-background rounded-lg p-2"
+        className="relative bg-background rounded-lg p-2"
+        onError={() => {
+          setError('sex');
+        }}
       >
         <FileInput className={cn('outline-dashed outline-1 outline-slate-500', hasErrors && 'outline-red-500')}>
           <div className="flex items-center justify-center flex-col p-8 w-full ">

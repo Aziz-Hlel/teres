@@ -1,10 +1,10 @@
 import type { DropzoneOptions } from 'react-dropzone';
 import { useEffect, useMemo, useState } from 'react';
-import useImageUpload from '../use-Image-Upload';
-import CircularProgressBar from '../CircularProgressBar ';
-import FileUploadComp from './FileUploadComp';
-import ImageCropperCom from './ImageCropperCom';
-import ImageDisplayedComp from './ImageDisplayedComp';
+import useImageUpload from '../hooks/use-Image-Upload';
+import CircularProgressBar from '../helper/CircularProgressBar ';
+import FileUploadComp from '../ui/FileUploadComp';
+import ImageCropperCom from '../ui/ImageCropperCom';
+import ImageDisplayedComp from '../ui/ImageDisplayedComp';
 
 type ImageUploadProps = {
   initMedia: { id: string; url: string; key: string } | null;

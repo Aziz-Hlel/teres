@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import type { Area, Point } from 'react-easy-crop';
 import { toast } from 'sonner';
-import getCroppedImg from './cropImg.func';
-import prepareImageForUpload from './prepareImageForUpload';
-import { uploadImage as uploadImage } from './getSignedUrlUpload';
+import getCroppedImg from '../helper/cropImg.func';
+import processImage from '../helper/processImage';
+import { uploadImage as uploadImage } from '../helper/getSignedUrlUpload';
+import { mediaState, type MediaState } from '../types/MediaState';
 
 type IUseImageUpload = {
   media: { id: string; url: string; key: string } | null;
@@ -31,11 +32,11 @@ const useImageUpload = ({ media, handleMediaUpload, clearErrors }: IUseImageUplo
 
   const [progress, setProgress] = useState(0);
 
-  const currentDisplayed: 'fileUpload' | 'copper' | 'loading' | 'imgDisplayed' = useMemo(() => {
-    if (progress > 0 && progress < 100) return 'loading';
-    if (file) return 'copper';
-    if (mediaObject.url) return 'imgDisplayed';
-    return 'fileUpload';
+  const currentDisplayed: MediaState = useMemo(() => {
+    if (progress > 0 && progress < 100) return mediaState.UPLOADING_MEDIA;
+    if (file) return mediaState.CROP;
+    if (mediaObject.url) return mediaState.READY;
+    return mediaState.UPLOAD_FILE;
   }, [file, mediaObject, progress]);
 
   const onZoomChange = (zoom: number) => setZoom(zoom);
@@ -63,7 +64,7 @@ const useImageUpload = ({ media, handleMediaUpload, clearErrors }: IUseImageUplo
       const croppedImage = await getCroppedImg(URL.createObjectURL(file), file.name, croppedAreaPixels);
       if (!croppedImage) return;
 
-      const optimizedImg = await prepareImageForUpload(croppedImage);
+      const optimizedImg = await processImage(croppedImage);
       const fileName = file.name.split('.')[0];
 
       setProgress(10);

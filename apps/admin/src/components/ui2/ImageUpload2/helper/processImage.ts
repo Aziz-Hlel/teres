@@ -4,7 +4,7 @@ interface ImageOptimizationOptions {
   format?: 'webp' | 'jpeg' | 'png';
 }
 
-const prepareImageForUpload = async (
+const processImage = async (
   file: File | Blob,
   options: ImageOptimizationOptions = {},
 ): Promise<{
@@ -89,4 +89,4 @@ const prepareImageForUpload = async (
   };
 };
 
-export default prepareImageForUpload;
+export default processImage;

@@ -12,6 +12,7 @@ import { useSelectedRow } from '../../context/selected-row-provider';
 import { MODULE_NAME } from '../../core/core';
 import FormUI from '../shared/FormUI';
 import type { TableRowType } from '../../core/types';
+import { useEffect } from 'react';
 
 const UpdateDialogInner = ({ selectedRow }: { selectedRow: TableRowType }) => {
   const { handleCancel } = useSelectedRow();
@@ -45,34 +46,17 @@ const UpdateDialogInner = ({ selectedRow }: { selectedRow: TableRowType }) => {
       toast.error('Failed to update product');
     }
   };
-
   console.log(form.formState.errors);
-
+  useEffect(() => {
+    form.setError('description', { message: 'zibbii' });
+  }, []);
   const thumbnailErrors = [form.formState.errors.thumbnailId?.message];
-
-  const clearMediaErrors = () => {
-    form.clearErrors('thumbnailId');
-  };
-
-  const handleThumbnailUpload = (newMediaId: string | null) => {
-    form.setValue(
-      'thumbnailId',
-      newMediaId ?? '',
-      newMediaId ? { shouldDirty: true, shouldValidate: true } : undefined,
-    );
-  };
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col h-full">
       <div className="flex-1 min-h-0 overflow-y-auto pr-2 overscroll-contain scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-transparent hover:scrollbar-thumb-neutral-400">
         <FieldGroup>
-          <FormUI
-            form={form}
-            initMedia={selectedRow.thumbnail}
-            thumbnailErrors={thumbnailErrors}
-            clearMediaErrors={clearMediaErrors}
-            handleThumbnailUpload={handleThumbnailUpload}
-          />
+          <FormUI form={form} initMedia={selectedRow.thumbnail} thumbnailErrors={thumbnailErrors} />
         </FieldGroup>
       </div>
 

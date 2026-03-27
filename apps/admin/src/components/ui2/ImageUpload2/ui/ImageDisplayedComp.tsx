@@ -10,6 +10,7 @@ type ImageDisplayedCompProps = {
   onFileChange: (value: File | null) => void;
   rollBackToInitImage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   hasErrors: boolean;
+  setError: (message: string) => void;
 };
 
 export default function ImageDisplayedComp({
@@ -22,9 +23,6 @@ export default function ImageDisplayedComp({
 }: ImageDisplayedCompProps) {
   return (
     <div className="relative w-full h-full flex flex-col justify-start ">
-      <div className={cn(' text-sm text-left w-full font-semibold mb-1', hasErrors && 'text-red-500')}>Thumbnail</div>
-      <div className=" text-sm text-left w-full text-gray-600 font-light mb-4">Uploaded Image</div>
-
       <div
         className={cn('border border-black rounded-lg border-dashed h-full w-full p-2 ', hasErrors && 'border-red-500')}
       >

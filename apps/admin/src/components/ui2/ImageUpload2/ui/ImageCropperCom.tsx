@@ -26,9 +26,6 @@ export default function ImageCropperCom({
 }: ImageCropperComProps) {
   return (
     <div className="relative w-full h-full flex flex-col justify-center items-center mr-auto ">
-      <div className=" text-sm text-left w-full font-semibold mb-1">Thumbnail</div>
-      <div className=" text-sm text-left w-full text-gray-600 font-light mb-4">Crop Image to 9:16</div>
-
       <div className="border border-black rounded-lg border-dashed h-full w-full p-2 ">
         <div className=" relative w-full h-68   ">
           <div className="bg-white">
