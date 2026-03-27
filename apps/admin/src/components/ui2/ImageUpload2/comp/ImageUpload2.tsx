@@ -7,6 +7,7 @@ import ImageCropperCom from './ImageCropperCom';
 import ImageDisplayedComp from './ImageDisplayedComp';
 import { Controller, type Path, type UseFormReturn } from 'react-hook-form';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
+import type { MediaResponse } from '@repo/contracts/schemas/media/MediaResponse';
 
 type FormWithThumbnail = {
   thumbnailId: string;
@@ -14,7 +15,7 @@ type FormWithThumbnail = {
 };
 
 interface ImageUploadProps<T extends FormWithThumbnail> {
-  initMedia: { id: string; url: string; key: string } | null;
+  initMedia: MediaResponse | null;
   mediaErrors: (string | undefined)[];
   handleMediaUpload: (newMediaId: string | null) => void;
   aspect?: number | null;
