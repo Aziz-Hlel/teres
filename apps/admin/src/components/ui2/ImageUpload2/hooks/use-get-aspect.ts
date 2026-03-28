@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useFile } from '../context/fileProvider';
 
 interface IUseGetAspect {
-  file: File | null;
   aspectProp?: number | null;
 }
 
-export const useGetAspect = ({ file, aspectProp }: IUseGetAspect) => {
+export const useGetAspect = ({ aspectProp }: IUseGetAspect) => {
+  const { file } = useFile();
   const [aspect, setAspect] = useState<number>(aspectProp ?? 1);
 
   useEffect(() => {

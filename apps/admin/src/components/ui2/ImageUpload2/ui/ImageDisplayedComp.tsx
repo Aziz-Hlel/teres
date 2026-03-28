@@ -2,39 +2,31 @@ import { Button } from '@/components/ui/button';
 import { FileInput, FileUploader } from '@/components/ui/file-upload';
 import { cn } from '@/lib/utils';
 import type { DropzoneOptions } from 'react-dropzone';
+import { useFile } from '../context/fileProvider';
 
 type ImageDisplayedCompProps = {
-  img: string | null;
   maxSizeInBytes: number;
   dropZoneConfig: DropzoneOptions;
-  onFileChange: (value: File | null) => void;
-  rollBackToInitImage: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   hasErrors: boolean;
   setError: (message: string) => void;
 };
 
-export default function ImageDisplayedComp({
-  img,
-  maxSizeInBytes,
-  dropZoneConfig,
-  onFileChange,
-  rollBackToInitImage,
-  hasErrors,
-}: ImageDisplayedCompProps) {
+export default function ImageDisplayedComp({ maxSizeInBytes, dropZoneConfig, hasErrors }: ImageDisplayedCompProps) {
+  const { mediaUrl, handleFileChange, handleRollBack } = useFile();
   return (
     <div className="relative w-full h-full flex flex-col justify-start ">
       <div
         className={cn('border border-black rounded-lg border-dashed h-full w-full p-2 ', hasErrors && 'border-red-500')}
       >
-        <img src={img ?? undefined} className=" mx-auto  h-72 object-contain rounded-lg" />
+        <img src={mediaUrl} className=" mx-auto  h-72 object-contain rounded-lg" />
 
         <div className="flex justify-end gap-4 px-4 pt-4">
-          <Button onClick={rollBackToInitImage} type="button" variant="outline" className="cursor-pointer">
+          <Button onClick={handleRollBack} type="button" variant="outline" className="cursor-pointer">
             Cancel
           </Button>
           <FileUploader
             value={null}
-            onValueChange={onFileChange}
+            onValueChange={handleFileChange}
             maxImageSize={maxSizeInBytes}
             dropzoneOptions={dropZoneConfig}
             className=" w-fit"

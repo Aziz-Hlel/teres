@@ -1,4 +1,4 @@
-const ArtDecoPattern = ({ className = "" }: { className?: string }) => {
+const ArtDecoPattern = ({ className = '' }: { className?: string }) => {
   return (
     <svg
       className={className}

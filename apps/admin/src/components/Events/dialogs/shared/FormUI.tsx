@@ -31,7 +31,7 @@ const FormUI = ({
       <ImageUpload2
         options={{
           aspect: null,
-          maxSize: 0.02,
+          maxSize: 5,
         }}
         initMedia={initMedia}
         mediaErrors={thumbnailErrors}

@@ -1,49 +1,48 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const menuItems = [
-  { 
-    name: "The Eclipse", 
-    desc: "Gin, fleur de sureau, champagne, citron vert", 
-    price: "18€",
-    image: "/cocktail-eclipse.jpg" // Remplacez par vos liens
+  {
+    name: 'The Eclipse',
+    desc: 'Gin, fleur de sureau, champagne, citron vert',
+    price: '18€',
+    image: '/cocktail-eclipse.jpg', // Remplacez par vos liens
   },
-  { 
-    name: "Nuit d'Orient", 
-    desc: "Whisky japonais, yuzu, matcha, gingembre", 
-    price: "22€",
-    image: "/cocktail-velours.jpg" // Remplacez par vos liens
+  {
+    name: "Nuit d'Orient",
+    desc: 'Whisky japonais, yuzu, matcha, gingembre',
+    price: '22€',
+    image: '/cocktail-velours.jpg', // Remplacez par vos liens
   },
-  { 
-    name: "Velours Noir", 
-    desc: "Rhum vieilli, café arabica, cacao, vanille", 
-    price: "20€",
-    image: "/cocktail-nuit.jpg" // Remplacez par vos liens
+  {
+    name: 'Velours Noir',
+    desc: 'Rhum vieilli, café arabica, cacao, vanille',
+    price: '20€',
+    image: '/cocktail-nuit.jpg', // Remplacez par vos liens
   },
-  { 
-    name: "Le Mirage", 
-    desc: "Vodka infusée, passion, litchi, rose", 
-    price: "19€",
-    image: "/cocktail-nuit.jpg" // Remplacez par vos liens
+  {
+    name: 'Le Mirage',
+    desc: 'Vodka infusée, passion, litchi, rose',
+    price: '19€',
+    image: '/cocktail-nuit.jpg', // Remplacez par vos liens
   },
-  { 
-    name: "Art Déco Sour", 
-    desc: "Bourbon, sirop d'érable, citron, œuf", 
-    price: "17€",
-    image: "/cocktail-velours.jpg" // Remplacez par vos liens
+  {
+    name: 'Art Déco Sour',
+    desc: "Bourbon, sirop d'érable, citron, œuf",
+    price: '17€',
+    image: '/cocktail-velours.jpg', // Remplacez par vos liens
   },
-  { 
-    name: "Crépuscule", 
-    desc: "Mezcal, Aperol, ananas rôti, piment", 
-    price: "21€",
-    image: "/cocktail-eclipse.jpg" // Remplacez par vos liens
+  {
+    name: 'Crépuscule',
+    desc: 'Mezcal, Aperol, ananas rôti, piment',
+    price: '21€',
+    image: '/cocktail-eclipse.jpg', // Remplacez par vos liens
   },
 ];
 
 const MenuSection = () => {
   return (
     <section id="carte" className="relative py-36 px-6 bg-[#000000] overflow-hidden">
-      
       {/* Ligne décorative en arrière-plan */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
 
@@ -55,9 +54,7 @@ const MenuSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="font-body text-[10px] tracking-[0.6em] uppercase text-primary/70 mb-5">
-            Savourer
-          </p>
+          <p className="font-body text-[10px] tracking-[0.6em] uppercase text-primary/70 mb-5">Savourer</p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide text-foreground mb-8">
             Nos Créations
           </h2>
@@ -77,8 +74,8 @@ const MenuSection = () => {
             >
               {/* Conteneur Image avec zoom au hover */}
               <div className="relative aspect-[4/5] overflow-hidden">
-                <img 
-                  src={item.image} 
+                <img
+                  src={item.image}
                   alt={item.name}
                   className="object-cover w-full h-full grayscale-[30%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                 />
@@ -91,13 +88,9 @@ const MenuSection = () => {
                   <h3 className="font-display text-xl text-foreground group-hover:text-primary transition-colors duration-500 tracking-wide">
                     {item.name}
                   </h3>
-                  <span className="font-display text-lg text-primary/90">
-                    {item.price}
-                  </span>
+                  <span className="font-display text-lg text-primary/90">{item.price}</span>
                 </div>
-                <p className="font-body text-xs leading-relaxed text-muted-foreground/70 tracking-wider">
-                  {item.desc}
-                </p>
+                <p className="font-body text-xs leading-relaxed text-muted-foreground/70 tracking-wider">{item.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -112,7 +105,7 @@ const MenuSection = () => {
         >
           <Link
             to="/menu"
-          className="hidden md:inline-block font-body text-xs tracking-[0.3em] uppercase px-6 py-2.5 border border-white text-white hover:bg-white hover:text-primary-foreground transition-all duration-300 rounded-full"     
+            className="hidden md:inline-block font-body text-xs tracking-[0.3em] uppercase px-6 py-2.5 border border-white text-white hover:bg-white hover:text-primary-foreground transition-all duration-300 rounded-full"
           >
             Voir la carte complète
           </Link>

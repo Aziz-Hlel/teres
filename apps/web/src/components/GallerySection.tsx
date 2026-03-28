@@ -1,23 +1,19 @@
-import { motion } from "framer-motion";
-import ArtDecoPattern from "./ArtDecoPattern";
+import { motion } from 'framer-motion';
+import ArtDecoPattern from './ArtDecoPattern';
 
 // Structure de données enrichie avec des images
 const galleryItems = [
-  { title: "Dimmed Atmosphere", img: "/galler1.jpg" },
-  { title: "Starlit Terrace", img: "/galler6.jpg" },
-  { title: "Black Marble Bar", img: "/galler2.jpg" },
-  { title: "Emerald Velvet", img: "/galler3.webp" },
-  { title: "Art DDeco Chandeliers", img: "/galler4.jpg" },
-  { title: "VIP Space", img: "/galler5.jpg" },
-  
+  { title: 'Dimmed Atmosphere', img: '/galler1.jpg' },
+  { title: 'Starlit Terrace', img: '/galler6.jpg' },
+  { title: 'Black Marble Bar', img: '/galler2.jpg' },
+  { title: 'Emerald Velvet', img: '/galler3.webp' },
+  { title: 'Art DDeco Chandeliers', img: '/galler4.jpg' },
+  { title: 'VIP Space', img: '/galler5.jpg' },
 ];
 
 const GallerySection = () => {
   return (
-    <section
-      id="galerie"
-      className="relative py-36 px-6 overflow-hidden bg-[#070619]"
-    >
+    <section id="galerie" className="relative py-36 px-6 overflow-hidden bg-[#070619]">
       {/* Background & Patterns */}
       <ArtDecoPattern className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" />
       <div className="absolute inset-0  pointer-events-none" />
@@ -31,12 +27,8 @@ const GallerySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="font-body text-[10px] tracking-[0.6em] uppercase text-primary/70 mb-4">
-            Atmosphere
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide text-white mb-8">
-            Our World
-          </h2>
+          <p className="font-body text-[10px] tracking-[0.6em] uppercase text-primary/70 mb-4">Atmosphere</p>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide text-white mb-8">Our World</h2>
           <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto" />
         </motion.div>
 

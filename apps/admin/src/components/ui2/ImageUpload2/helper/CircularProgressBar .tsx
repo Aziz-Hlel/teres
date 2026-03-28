@@ -1,4 +1,7 @@
-const CircularProgressBar = ({ progress }: { progress: number }) => {
+import { useFile } from '../context/fileProvider';
+
+const CircularProgressBar = () => {
+  const { progress } = useFile();
   const radius = 40;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - ((100 - progress) / 100) * circumference;

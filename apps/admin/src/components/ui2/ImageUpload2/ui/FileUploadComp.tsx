@@ -2,33 +2,24 @@ import { CloudUpload } from 'lucide-react';
 import type { DropzoneOptions } from 'react-dropzone';
 import { FileInput, FileUploader } from '@/components/ui/file-upload';
 import { cn } from '@/lib/utils';
+import { useFile } from '../context/fileProvider';
 
 type FileUploadCompProps = {
-  onFileChange: (value: File | null) => void;
   maxSizeInBytes: number;
   dropZoneConfig: DropzoneOptions;
   hasErrors: boolean;
-  setError: (message: string) => void;
 };
 
-export default function FileUploadComp({
-  onFileChange,
-  maxSizeInBytes,
-  dropZoneConfig,
-  hasErrors,
-  setError,
-}: FileUploadCompProps) {
+export default function FileUploadComp({ maxSizeInBytes, dropZoneConfig, hasErrors }: FileUploadCompProps) {
+  const { handleFileChange } = useFile();
   return (
     <div className="relative w-full h-full flex flex-col justify-start ">
       <FileUploader
         value={null}
-        onValueChange={onFileChange}
+        onValueChange={handleFileChange}
         maxImageSize={maxSizeInBytes}
         dropzoneOptions={dropZoneConfig}
         className="relative bg-background rounded-lg p-2"
-        onError={() => {
-          setError('sex');
-        }}
       >
         <FileInput className={cn('outline-dashed outline-1 outline-slate-500', hasErrors && 'outline-red-500')}>
           <div className="flex items-center justify-center flex-col p-8 w-full ">

@@ -1,10 +1,9 @@
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field';
 import type { MediaResponse } from '@repo/contracts/schemas/media/MediaResponse';
-import { useEffect, useMemo } from 'react';
 import type { DropzoneOptions } from 'react-dropzone';
 import { Controller, type FieldValues, type Path, type UseFormReturn } from 'react-hook-form';
+import { FileProvider } from './context/fileProvider';
 import CircularProgressBar from './helper/CircularProgressBar ';
-import { useGetAspect } from './hooks/use-get-aspect';
 import useImageUpload from './hooks/use-Image-Upload';
 import { mediaState } from './types/MediaState';
 import FileUploadComp from './ui/FileUploadComp';
@@ -34,13 +33,32 @@ const isString = <T extends FieldValues>(media: unknown, fieldName: Path<T>): me
   }
   return true;
 };
-const ImageUpload2 = <T extends FieldValues>({
+
+interface MediaUpload_MainProps<T extends FieldValues> {
+  fieldName: Path<T>;
+  initMedia: MediaResponse | null;
+  mediaErrors: (string | undefined)[];
+  options?: {
+    /**
+     * Maximum size of the file in MB
+     */
+    maxSize?: number;
+    /**
+     * Aspect ratio of the image, if null or not set, it will use the aspect ratio of the uploaded image
+     */
+    aspect?: number | null;
+  };
+  form: UseFormReturn<T>;
+}
+const MediaUpload_Main = <T extends FieldValues>({
   fieldName,
   initMedia,
   mediaErrors,
   options,
   form,
-}: ImageUploadProps<T>) => {
+}: MediaUpload_MainProps<T>) => {
+  const { currentDisplayed } = useImageUpload();
+
   const media = form.getValues(fieldName);
 
   isString(media, fieldName);
@@ -58,39 +76,6 @@ const ImageUpload2 = <T extends FieldValues>({
     multiple: false,
   };
 
-  const clearErrors = () => form.clearErrors(fieldName);
-  const handleMediaUpload = (newMediaId: string | null) => {
-    form.setValue(
-      fieldName,
-      newMediaId ?? ('' as any), //*
-      newMediaId ? { shouldDirty: true, shouldValidate: true } : undefined,
-    );
-    clearErrors();
-  };
-
-  const {
-    currentDisplayed,
-    file,
-    img,
-    progress,
-    zoom,
-    crop,
-    Crop_OptimizeImage,
-    rollBackToInitImage,
-    handleCancel,
-    onZoomChange,
-    onCropChange,
-    onCropComplete,
-    onFileChange,
-  } = useImageUpload({
-    media: initMedia,
-    clearErrors,
-    handleMediaUpload,
-  });
-
-  const { aspect } = useGetAspect({ file, aspectProp: options?.aspect });
-  const imgUrl: string | undefined = useMemo(() => (file ? URL.createObjectURL(file) : undefined), [file]);
-
   const hasErrors = mediaErrors.filter((err) => err !== undefined).length > 0;
 
   const setError = (message: string) => {
@@ -104,71 +89,70 @@ const ImageUpload2 = <T extends FieldValues>({
   // }, []);
 
   return (
-    <>
-      <div className=" h-105 ">
-        <Controller<T>
-          name={fieldName}
-          control={form.control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={`${fieldName}-input`}>Thumbnail</FieldLabel>
-              <FieldDescription>
-                {currentDisplayed === mediaState.UPLOAD_FILE && 'Select an image to upload.'}
-                {currentDisplayed === mediaState.CROP && 'Crop Image to 9:16'}
-                {currentDisplayed === mediaState.UPLOADING_MEDIA && 'Uploading Media...'}
-                {currentDisplayed === mediaState.READY && 'Uploaded Image'}
-              </FieldDescription>
+    <Controller<T>
+      name={fieldName}
+      control={form.control}
+      render={({ fieldState }) => (
+        <Field data-invalid={fieldState.invalid}>
+          <FieldLabel htmlFor={`${fieldName}-input`}>Thumbnail</FieldLabel>
+          <FieldDescription>
+            {currentDisplayed === mediaState.UPLOAD_FILE && 'Select an image to upload.'}
+            {currentDisplayed === mediaState.CROP && 'Crop Image to 9:16'}
+            {currentDisplayed === mediaState.UPLOADING_MEDIA && 'Uploading Media...'}
+            {currentDisplayed === mediaState.READY && 'Uploaded Image'}
+          </FieldDescription>
 
-              {currentDisplayed === mediaState.UPLOAD_FILE && (
-                <FileUploadComp
-                  onFileChange={onFileChange}
-                  maxSizeInBytes={maxSizeInBytes}
-                  dropZoneConfig={dropZoneConfig}
-                  hasErrors={hasErrors}
-                  setError={setError}
-                />
-              )}
-
-              {currentDisplayed === mediaState.CROP && (
-                <ImageCropperCom
-                  imgUrl={imgUrl}
-                  crop={crop}
-                  zoom={zoom}
-                  aspect={aspect}
-                  onCropChange={onCropChange}
-                  onZoomChange={onZoomChange}
-                  handleCancel={handleCancel}
-                  Crop_OptimizeImage={Crop_OptimizeImage}
-                  onCropComplete={onCropComplete}
-                />
-              )}
-
-              {currentDisplayed === mediaState.UPLOADING_MEDIA && (
-                <div className="relative w-full h-full flex flex-col justify-start ">
-                  <div className="flex justify-center items-center mx-auto gap-2 h-full">
-                    <span className=" -translate-y-0.5">Loading</span>
-                    <CircularProgressBar progress={progress} />
-                  </div>
-                </div>
-              )}
-
-              {currentDisplayed === mediaState.READY && (
-                <ImageDisplayedComp
-                  img={img}
-                  maxSizeInBytes={maxSizeInBytes}
-                  dropZoneConfig={dropZoneConfig}
-                  onFileChange={onFileChange}
-                  rollBackToInitImage={rollBackToInitImage}
-                  hasErrors={hasErrors}
-                  setError={setError}
-                />
-              )}
-
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
+          {currentDisplayed === mediaState.UPLOAD_FILE && (
+            <FileUploadComp maxSizeInBytes={maxSizeInBytes} dropZoneConfig={dropZoneConfig} hasErrors={hasErrors} />
           )}
-        />
-      </div>
+
+          {currentDisplayed === mediaState.CROP && <ImageCropperCom aspect={options?.aspect} />}
+
+          {currentDisplayed === mediaState.UPLOADING_MEDIA && (
+            <div className="relative w-full h-full flex flex-col justify-start ">
+              <div className="flex justify-center items-center mx-auto gap-2 h-full">
+                <span className=" -translate-y-0.5">Loading</span>
+                <CircularProgressBar />
+              </div>
+            </div>
+          )}
+
+          {currentDisplayed === mediaState.READY && (
+            <ImageDisplayedComp
+              maxSizeInBytes={maxSizeInBytes}
+              dropZoneConfig={dropZoneConfig}
+              hasErrors={hasErrors}
+              setError={setError}
+            />
+          )}
+
+          {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+        </Field>
+      )}
+    />
+  );
+};
+
+const ImageUpload2 = <T extends FieldValues>({
+  fieldName,
+  initMedia,
+  mediaErrors,
+  options,
+  form,
+}: ImageUploadProps<T>) => {
+  return (
+    <>
+      <FileProvider initMedia={initMedia} form={form} fieldName={fieldName}>
+        <div className=" h-105 ">
+          <MediaUpload_Main
+            fieldName={fieldName}
+            initMedia={initMedia}
+            mediaErrors={mediaErrors}
+            options={options}
+            form={form}
+          />
+        </div>
+      </FileProvider>
     </>
   );
 };

@@ -1,36 +1,31 @@
 import { Button } from '@/components/ui/button';
-import Cropper, { type Area, type Point } from 'react-easy-crop';
+import { useMemo } from 'react';
+import Cropper from 'react-easy-crop';
+import { useFile } from '../context/fileProvider';
+import { useCrop } from '../hooks/use-crop';
+import { useGetAspect } from '../hooks/use-get-aspect';
 
 type ImageCropperComProps = {
-  imgUrl: string | undefined;
-  crop: { x: number; y: number };
-  zoom: number;
-  onCropChange: (point: { x: number; y: number }) => void;
-  onZoomChange: (zoom: number) => void;
-  handleCancel: () => void;
-  Crop_OptimizeImage: () => Promise<void>;
-  onCropComplete: (_: Point, croppedAreaPixels: Area) => void;
-  aspect: number | undefined;
+  aspect: number | null | undefined;
 };
 
-export default function ImageCropperCom({
-  imgUrl,
-  crop,
-  zoom,
-  aspect,
-  onCropChange,
-  onZoomChange,
-  handleCancel,
-  Crop_OptimizeImage,
-  onCropComplete,
-}: ImageCropperComProps) {
+export default function ImageCropperCom({ aspect: aspectProp }: ImageCropperComProps) {
+  const { file, handleFileChange } = useFile();
+  const { crop, zoom, onCropChange, onZoomChange, process_upload_File, onCropComplete } = useCrop();
+
+  const { aspect } = useGetAspect({ aspectProp: aspectProp });
+
+  const image = useMemo(() => (file ? URL.createObjectURL(file) : undefined), [file]);
+
+  const handleCancel = () => handleFileChange(null);
+
   return (
     <div className="relative w-full h-full flex flex-col justify-center items-center mr-auto ">
       <div className="border border-black rounded-lg border-dashed h-full w-full p-2 ">
         <div className=" relative w-full h-68   ">
           <div className="bg-white">
             <Cropper
-              image={imgUrl}
+              image={image}
               crop={crop}
               zoom={zoom}
               aspect={aspect}
@@ -51,7 +46,7 @@ export default function ImageCropperCom({
             max={3}
             step={0.1}
             aria-labelledby="Zoom"
-            onChange={(e) => onZoomChange(e.target.valueAsNumber)}
+            onChange={onZoomChange}
             className=" w-full"
           />
         </div>
@@ -59,7 +54,7 @@ export default function ImageCropperCom({
           <Button onClick={handleCancel} variant="outline" className="cursor-pointer">
             Cancel
           </Button>
-          <Button onClick={async () => await Crop_OptimizeImage()} variant="default" className="cursor-pointer">
+          <Button onClick={async () => await process_upload_File()} variant="default" className="cursor-pointer">
             Confirm
           </Button>
         </div>
