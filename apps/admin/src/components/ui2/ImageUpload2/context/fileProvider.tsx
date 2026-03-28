@@ -58,7 +58,7 @@ export function FileProvider<T extends FieldValues>({ children, initMedia, form,
       const fileName = file?.name.split('.')[0];
 
       setProgress(10);
-      //   setFile(null); forgot why
+      setFile(null); // forgot why
 
       const { id } = await uploadImage({
         uploadedImg: compressedImage,

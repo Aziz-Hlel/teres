@@ -54,7 +54,7 @@ export default function ImageCropperCom({ aspect: aspectProp }: ImageCropperComP
           <Button onClick={handleCancel} variant="outline" className="cursor-pointer">
             Cancel
           </Button>
-          <Button onClick={async () => await process_upload_File()} variant="default" className="cursor-pointer">
+          <Button onClick={process_upload_File} variant="default" className="cursor-pointer">
             Confirm
           </Button>
         </div>

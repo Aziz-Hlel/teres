@@ -1,10 +1,9 @@
 import { useState, type ChangeEvent } from 'react';
 import type { Area, Point } from 'react-easy-crop';
-import getCroppedImg from '../helper/cropImg.func';
-import { useFile } from '../context/fileProvider';
-import compressImage from '../helper/processImage';
-import { uploadImage } from '../helper/getSignedUrlUpload';
 import { toast } from 'sonner';
+import { useFile } from '../context/fileProvider';
+import getCroppedImg from '../helper/cropImg.func';
+import compressImage from '../helper/processImage';
 
 export const useCrop = () => {
   const { file, handleRollBack, upload_media } = useFile();
@@ -17,7 +16,8 @@ export const useCrop = () => {
   const onCropChange = (point: Point) => setCrop(point);
   const onCropComplete = (_: Point, croppedAreaPixels: Area) => setCroppedAreaPixels(croppedAreaPixels);
 
-  const process_upload_File = async () => {
+  const process_upload_File = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
       if (!file || !croppedAreaPixels) return;
 
