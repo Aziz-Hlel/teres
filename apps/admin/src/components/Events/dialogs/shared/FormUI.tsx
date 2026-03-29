@@ -1,6 +1,6 @@
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
-import ImageUpload2 from '@/components/ui2/ImageUpload2/ImageUpload2';
+import MediaUpload from '@/components/ui2/MediaUpload/ImageUpload2';
 import type { CreateEventSchema } from '@repo/contracts/schemas/events/createEventSchema';
 import type { MediaResponse } from '@repo/contracts/schemas/media/MediaResponse';
 import { Controller, type UseFormReturn } from 'react-hook-form';
@@ -28,7 +28,7 @@ const FormUI = ({
         )}
       />
 
-      <ImageUpload2
+      <MediaUpload
         options={{
           aspect: null,
           maxSize: 5,

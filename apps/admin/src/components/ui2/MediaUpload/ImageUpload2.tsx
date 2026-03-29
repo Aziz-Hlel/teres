@@ -34,29 +34,7 @@ const isString = <T extends FieldValues>(media: unknown, fieldName: Path<T>): me
   return true;
 };
 
-interface MediaUpload_MainProps<T extends FieldValues> {
-  fieldName: Path<T>;
-  initMedia: MediaResponse | null;
-  mediaErrors: (string | undefined)[];
-  options?: {
-    /**
-     * Maximum size of the file in MB
-     */
-    maxSize?: number;
-    /**
-     * Aspect ratio of the image, if null or not set, it will use the aspect ratio of the uploaded image
-     */
-    aspect?: number | null;
-  };
-  form: UseFormReturn<T>;
-}
-const MediaUpload_Main = <T extends FieldValues>({
-  fieldName,
-  initMedia,
-  mediaErrors,
-  options,
-  form,
-}: MediaUpload_MainProps<T>) => {
+const MediaUpload_Main = <T extends FieldValues>({ fieldName, mediaErrors, options, form }: ImageUploadProps<T>) => {
   const { currentDisplayed } = useImageUpload();
 
   const media = form.getValues(fieldName);
@@ -133,7 +111,7 @@ const MediaUpload_Main = <T extends FieldValues>({
   );
 };
 
-const ImageUpload2 = <T extends FieldValues>({
+const MediaUpload = <T extends FieldValues>({
   fieldName,
   initMedia,
   mediaErrors,
@@ -157,4 +135,4 @@ const ImageUpload2 = <T extends FieldValues>({
   );
 };
 
-export default ImageUpload2;
+export default MediaUpload;
