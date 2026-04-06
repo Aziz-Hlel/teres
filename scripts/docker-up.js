@@ -17,9 +17,9 @@ if (!envArg) {
   process.exit(1);
 }
 
-if (!['local', 'dev', 'build', 'stage', 'prod'].includes(envArg)) {
+if (!['local', 'dev', 'stage', 'prod'].includes(envArg)) {
   console.error(`Invalid environment: ${envArg}`);
-  console.error('Available environments: local, dev, build, stage, prod');
+  console.error('Available environments: local, dev, stage, prod');
   process.exit(1);
 }
 
@@ -33,7 +33,6 @@ const ENV_ROOT = join(ROOT, '.env');
 const ENV_MAP = {
   local: join(ROOT, 'config', '.env.local'),
   dev: join(ROOT, 'config', '.env.dev'),
-  build: join(ROOT, 'config', '.env.build'),
   stage: join(ROOT, 'config', '.env.stage'),
   prod: join(ROOT, 'config', '.env.prod'),
 };
@@ -41,7 +40,6 @@ const ENV_MAP = {
 const DOCKER_COMPOSE_MAP = {
   local: join(DOCKER_ROOT, 'compose.local.yml'),
   dev: join(DOCKER_ROOT, 'compose.dev.yml'),
-  build: join(DOCKER_ROOT, 'compose.build.yml'),
   stage: join(DOCKER_ROOT, 'compose.stage.yml'),
   prod: join(DOCKER_ROOT, 'compose.prod.yml'),
 };
@@ -66,16 +64,20 @@ console.log(env);
 console.log(`${YELLOW}🚀 Starting Docker in ${envArg.toUpperCase()} Env...${NC}`);
 
 // Run Docker Compose
-spawnSync('docker', ['compose', '-f', DOCKER_COMPOSE_MAP[envArg], 'up', '--build'], {
-  stdio: 'inherit',
-  env: {
-    ...process.env,
-    ...loadEnv(ENV_ROOT),
-    ...loadEnv(ENV_MAP[envArg]),
-    ...loadEnv(ENV_LOCAL),
-    PROJECT_ROOT: ROOT,
-  },
-});
+const isV2 = (() => {
+  try {
+    execSync('docker compose version', { stdio: 'ignore' });
+    return true;
+  } catch {
+    return false;
+  }
+})();
+
+const command = isV2 ? 'docker' : 'docker-compose';
+
+const args = [...(isV2 ? ['compose'] : []), '-f', DOCKER_COMPOSE_MAP[envArg], 'up', '--build'];
+
+spawnSync(command, args, { stdio: 'inherit', env });
 
 console.log(`${GREEN}✅ Done!${NC}`);
 
