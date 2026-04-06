@@ -8,6 +8,10 @@ services:
         VITE_NODE_ENV: ${NODE_ENV}
         VITE_API_URL: ${API_URL}
 
+    ports:
+      - 3050:3000
+      - 3051:3001
+
     # command: 'sleep infinity'
 
     networks:
