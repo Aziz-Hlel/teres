@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui/button';
-import React from 'react';
-import type { CategoriesSelection } from './FoodV2';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import type { CategoriesSelection } from './FoodV2';
 
 const CategoryTab = ({
   categories,

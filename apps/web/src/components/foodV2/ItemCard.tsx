@@ -17,14 +17,14 @@ const ItemCard = ({
             <CardContent className="flex flex-col h-fit p-0 m-0  ">
               <img src={item.src} alt={item.title} className=" w-full h-[65dvh] rounded-t-xl  object-cover  " />
               <div className="px-0.5 sm:px-4 overflow-y-auto max-h-[25dvh] h-fit flex flex-col py-4  space-y-2 overscroll-contain scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-transparent hover:scrollbar-thumb-neutral-400">
-                <DialogTitle className="font-semibold  uppercase text-primary text-4xl  text-center">
+                <DialogTitle className="font-semibold  uppercase text-primary text-2xl tracking-wide  text-center font-['EB_Garamond']">
                   {item.title}
                 </DialogTitle>
                 <div className=" flex flex-col items-center space-y-2 h-fit">
-                  <DialogDescription className=" text-white text-md pl-2 h-fit text-center tracking-tight leading-tight whitespace-pre-line">
+                  <DialogDescription className=" text-white text-md pl-2 h-fit text-center tracking-tight leading-tight whitespace-pre-line font-cinzel">
                     {item.description}
                   </DialogDescription>
-                  <span className=" text-white text-2xl pl-2 h-fit text-center">{item.price} BD</span>
+                  <span className=" text-white text-2xl pl-2 h-fit text-center font-cinzel">{item.price} BD</span>
 
                   <div className=" w-fit mx-auto text-muted-foreground text-center text-xs lg:text-sm">
                     *All Prices Are In Bahraini Dinars & Subject To 10% Service Charge, 10% Vat & 5% Gov. Levy
