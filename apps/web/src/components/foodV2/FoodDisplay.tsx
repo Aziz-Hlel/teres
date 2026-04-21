@@ -20,12 +20,14 @@ const FoodDisplay = ({
             <img src={item.src} alt={item.title} className=" object-fill w-full h-44 rounded-lg" />
           </div>
           <div className="flex flex-col w-full ">
-            <h2 className="text-lg font-bold mb-2 text-white">{item.title}</h2>
+            <h2 className="text-lg font-bold mb-2 text-white font-sans">{item.title}</h2>
             <p className="font-cinzel text-white/80 text-md line-clamp-2">{item.description}</p>
             <p className=" text-yellow-400 font-semibold mt-2 font-cinzel ">{item.price} BD </p>
 
             <div className=" flex-1 w-full h-full flex items-end justify-end">
-              <Button className=" bg-primary hover:bg-primary/80 text-primary-foreground">View Details</Button>
+              <Button className=" bg-primary hover:bg-primary/80 text-primary-foreground font-sans">
+                View Details
+              </Button>
             </div>
           </div>
         </div>

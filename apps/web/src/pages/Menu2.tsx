@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, PanInfo, Variants } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, ZoomIn, ZoomOut } from 'lucide-react';
 import ArtDecoPattern from '@/components/ArtDecoPattern';
 import FoodV2 from '@/components/foodV2/FoodV2';
+import { PanInfo, Variants } from 'framer-motion';
+import { useCallback, useEffect, useState } from 'react';
 
 const pages = [
   { type: 'fullImage', image: '/images/Teres_Mar 2026_Drinks Menu_page-0001.jpg', title: 'Couverture' },

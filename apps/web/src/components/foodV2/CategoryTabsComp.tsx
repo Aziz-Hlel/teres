@@ -29,7 +29,10 @@ const CategoryTab = ({
       ))}
 
       <Link to="/menu/all">
-        <Button className={cn('cursor-pointer text-primary underline  ')} variant="link">
+        <Button
+          className={cn('cursor-pointer text-primary underline  outline-primary border-primary border ')}
+          variant="secondary"
+        >
           View All
         </Button>
       </Link>
