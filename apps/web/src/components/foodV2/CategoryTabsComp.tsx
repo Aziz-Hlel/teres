@@ -27,14 +27,14 @@ const CategoryTab = ({
         </Button>
       ))}
 
-      <Link to="/menu/all">
-        <Button
-          className={cn('cursor-pointer text-primary underline  outline-primary border-primary border ')}
-          variant="secondary"
-        >
+      <Button
+        className={cn('cursor-pointer text-primary underline outline-primary border-primary border')}
+        variant="secondary"
+      >
+        <a href="/menu/Teres_menu.pdf" target="_blank" rel="noopener noreferrer">
           View All
-        </Button>
-      </Link>
+        </a>
+      </Button>
     </div>
   );
 };
